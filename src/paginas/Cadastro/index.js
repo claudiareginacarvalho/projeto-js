@@ -10,7 +10,8 @@ class Cadastro extends Component {
             email: '',
             senha: '',
             nome: '',
-            sobrenome: ''
+            sobrenome: '',
+            dataNascimento:''
         };
 
         this.gravar = this.gravar.bind(this);
@@ -22,7 +23,8 @@ class Cadastro extends Component {
         then(async(retorno) =>{
             firebase.firestore().collection("usuario").doc(retorno.user.uid).set({
                 nome: this.state.nome,
-                sobrenome: this.state.sobrenome
+                sobrenome: this.state.sobrenome,
+                dataNacimento: this.state.dataNascimento
             })
         });
 
@@ -39,7 +41,7 @@ class Cadastro extends Component {
     render() {
         return (
             <div>
-                <h1>Pagina de Cadastro</h1>
+               <h1>Bem vindo a Pagina de Cadastro do meu projeto de Desenvolvimento Web</h1>
 
                 <input
                     type="text"
@@ -68,10 +70,23 @@ class Cadastro extends Component {
                     placeholder="Sobrenome"
                     onChange={(e) => this.setState({ sobrenome: e.target.value })}
                 />
+                <br />
+                <input
+                    type="date"
+                    placeholder="Data de Nascimento"
+                    onChange={(e) => this.setState({ dataNascimento: e.target.value })}
+                />
 
                 <br />
 
-                <button onClick={this.gravar}>Gravar</button>
+                <button onClick={this.gravar}>Cadastrar</button>
+                <br />
+                <br />
+                <span>se já tem uma conta siga para o login</span>
+                <br />
+                <Link to="/login">
+                    <button>login</button>
+                </Link>
             </div>
         );
     }

@@ -14,11 +14,15 @@ class Login extends Component {
     }
 
     async acessar(){
+        this.setState({ erro: "" });
+
         await firebase.auth().signInWithEmailAndPassword (this.state.email, this.state.senha)
         .then(()=> {
             window.location.href = "./principal";
+        })
+        .catch((erro)=>{
+            this.setState({ erro: "Erro ao acessar: E-mail ou senha incorretos ou não cadastrado." });
         });
-        /*.catch((erro)=>{});*/
     }
 
     render() {
@@ -40,6 +44,11 @@ class Login extends Component {
                 />
                 <br />
                 <button onClick={this.acessar}>Acessar</button>
+
+                {this.state.erro && (
+                    <p style={{ color: 'red' }}>{this.state.erro}</p>
+                )}
+
             </div>
         );
     }
