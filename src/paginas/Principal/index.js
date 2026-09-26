@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
+import './principal.css';
 
 class Principal extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Principal extends Component {
         this.state = {
             nome: '',
             sobrenome: '',
-            dataNacimento:''
+            dataNascimento: ''
         }
     }
 
@@ -20,7 +21,7 @@ class Principal extends Component {
                     this.setState({
                         nome: retorno.data().nome,
                         sobrenome: retorno.data().sobrenome,
-                        dataNacimento: retorno.data().dataNacimento
+                        dataNascimento: retorno.data().dataNascimento
 
                     });
                }); 
@@ -32,10 +33,10 @@ class Principal extends Component {
 
     render(){
         return(
-            <div>
+            <div className="principal">
                     Nome: {this.state.nome} <br/>
                     Sobrenome: {this.state.sobrenome}<br/>
-                    Data de Nascimento: {this.state.dataNacimento}
+                    Data de Nascimento: {this.state.dataNascimento}
             </div>
         )
     }

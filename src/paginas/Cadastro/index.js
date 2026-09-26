@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from '../../Firebase';
+import './cadastro.css';
 
 class Cadastro extends Component {
     constructor(props) {
@@ -11,22 +12,25 @@ class Cadastro extends Component {
             senha: '',
             nome: '',
             sobrenome: '',
-            dataNascimento:''
+            dataNascimento:'',
+     
         };
 
         this.gravar = this.gravar.bind(this);
     }
 
     async gravar() {
-        
+               
         await firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.senha).
         then(async(retorno) =>{
             firebase.firestore().collection("usuario").doc(retorno.user.uid).set({
                 nome: this.state.nome,
                 sobrenome: this.state.sobrenome,
-                dataNacimento: this.state.dataNascimento
+                dataNascimento: this.state.dataNascimento
             })
-        });
+            this.setState({ erro: '' });
+        })
+       
 
        /*firebase.firestore().collection('usuario').add({
             nome: this.state.nome,
@@ -40,7 +44,7 @@ class Cadastro extends Component {
 
     render() {
         return (
-            <div>
+            <div className="cadastro">
                <h1>Bem vindo a Pagina de Cadastro do meu projeto de Desenvolvimento Web</h1>
 
                 <input
@@ -80,6 +84,7 @@ class Cadastro extends Component {
                 <br />
 
                 <button onClick={this.gravar}>Cadastrar</button>
+                
                 <br />
                 <br />
                 <span>se já tem uma conta siga para o login</span>

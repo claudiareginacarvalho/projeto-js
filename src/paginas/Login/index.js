@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
+import './login.css';
 
 class Login extends Component {
     constructor (props){
@@ -27,7 +28,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className="login">
             
                 <h1>Login</h1>
                 <input
